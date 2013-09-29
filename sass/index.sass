@@ -1,0 +1,41 @@
+=mobile
+  @media (max-width: 600px)
+    @content
+
+.gutter
+  background: red
+  margin: 0 auto
+  width: 600px
+
+  +mobile
+    margin: 0
+    width: 100%
+
+=row
+  display: block
+  letter-spacing: -0.31em
+  width: 100%
+
+.row
+  +row
+
+%column
+  letter-spacing: normal
+  background: rgba(0, 255, 0, 0.5)
+  display: inline-block
+
+=column($ratio: 33.33%)
+  width: $ratio
+
+$ratios: 2 3 4 5 6 7 8 9 10
+
+@each $ratio in $ratios
+  $percent: (1 / $ratio) * 100%
+  .column-1-#{$ratio}
+    @extend %column
+    +column($percent)
+
++mobile
+  %column
+    display: block
+    width: 100%
